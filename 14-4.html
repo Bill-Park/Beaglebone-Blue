@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            hi templates    
+        </title>
+        <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    </head>
+    <body>
+        <div>
+            div value
+        </div>
+        hi this is hi templates <br/>
+        data from {{value}} <br/>
+        {{no}}
+        <button type="button" onclick="led1()">
+            LED1
+        </button>
+        <button type="button" onclick="led2()">
+            LED2
+        </button>
+        <br/>
+        <span id=btn1>no data</span>
+        <span id=btn2>no data</span>
+        <br/>
+        
+        <img src="{{ url_for('frame')}}">
+    </body>
+</html>
+
+<script type="text/javascript">
+    // setInterval(update_value, 500) ;
+    
+    function update_value() {
+        $.getJSON("/button", function(data) {
+            console.log(data) ;
+            // $('#buttonValue').text(data.value) ;
+            $('#btn1').text(data.btn1) ;
+            $('#btn2').text(data.btn2) ;
+        }) ;
+    }
+    
+    function led1() {
+        $.post("/led", {
+            "led": "1"
+        }) ;
+    }
+    
+    function led2() {
+        $.post("/led", {
+            "led": "2"
+        }) ;
+    }
+    
+</script>
